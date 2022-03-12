@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlogForEducation.Domain\BlogForEducation.Domain.csproj" />
+    <ProjectReference Include="..\BlogForEducation.Infrastructrue\BlogForEducation.Infrastructrue.csproj" />
+  </ItemGroup>
+
+</Project>
