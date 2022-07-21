@@ -1,17 +1,15 @@
-﻿using BlogForEducation.Domain.Models;
-using System;
+﻿using BlogForEducation.Application.DTOs;
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BlogForEducation.Application.Interfaces
 {
     public interface IUserService
     {
-        Task<IReadOnlyList<User>> GetAllUserAsync();
-        Task<User> GetUserByIdAsync(int id);
-        Task<User> CreateUserAsync(User user);
-
+       public Task<IReadOnlyList<UserDto>> GetAllUserAsync();
+       public Task<UserDto> GetUserByIdAsync(int id);
+       public Task<UserDto> CreateUserAsync(UserForCreationDto user);
+        public Task<BlogDto> CreateBlogAsync(BlogForCreationDto blogDto,int userId);
     }
 }

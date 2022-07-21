@@ -20,7 +20,7 @@ namespace BlogForEducation.Infrastructrue.Repositories
         public async virtual Task<T> AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
             return entity;
         }
 
@@ -35,9 +35,14 @@ namespace BlogForEducation.Infrastructrue.Repositories
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id,IList<string> includes)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            var entity = _dbContext.Set<T>();
+            foreach (var include in includes)
+            {
+                entity.Include(include);
+            }
+            return await entity.FindAsync(id);
         }
 
         public virtual async Task<IReadOnlyList<T>> GetPagedListAsync(int pageNumber, int pageSize)
@@ -52,7 +57,11 @@ namespace BlogForEducation.Infrastructrue.Repositories
         public virtual async Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
+        }
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _dbContext.SaveChangesAsync()>=0;
         }
     }
 }

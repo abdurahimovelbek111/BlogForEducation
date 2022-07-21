@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-  </ItemGroup>
-
-  <ItemGroup>
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <ProjectReference Include="..\BlogForEducation.Domain\BlogForEducation.Domain.csproj" />
     <ProjectReference Include="..\BlogForEducation.Infrastructrue\BlogForEducation.Infrastructrue.csproj" />
   </ItemGroup>

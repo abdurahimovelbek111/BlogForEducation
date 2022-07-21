@@ -1,10 +1,7 @@
-﻿using BlogForEducation.Application.Interfaces;
-using BlogForEducation.Domain.Models;
-using Microsoft.AspNetCore.Http;
+﻿using BlogForEducation.Application.DTOs;
+using BlogForEducation.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BlogForEducation.Api.Controllers
@@ -30,9 +27,14 @@ namespace BlogForEducation.Api.Controllers
             return Ok(await _userService.GetUserByIdAsync(id));
         }
         [HttpPost()]
-        public async Task<IActionResult> GetUserCreate([FromBody] User user)
+        public async Task<IActionResult> PostUser([FromBody] UserForCreationDto userDto)
         {
-            return Created("",await _userService.CreateUserAsync(user));
+            return Created("",await _userService.CreateUserAsync(userDto));
+        }
+        [HttpPost("id:int/blog")]
+        public async Task<IActionResult> PostBlog([FromBody] BlogForCreationDto blogDto,int id)
+        {
+            return Created("", await _userService.CreateBlogAsync(blogDto,id));
         }
     }
 }
